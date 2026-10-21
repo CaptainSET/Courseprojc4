@@ -1,0 +1,79 @@
+﻿<Window x:Class="CRS.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Панель администратора"
+        Height="720" Width="1200"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Шапка -->
+        <Border Grid.Row="0" Background="#EEF3FA" BorderBrush="#C5D5EA"
+                BorderThickness="1" Padding="10,6" Margin="0,0,0,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock x:Name="TxtUserInfo" FontSize="13" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="TxtUserRoles" FontSize="11" Foreground="Gray"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="Производители - Категории" Width="220" Height="26"
+                        Margin="0,0,8,0" Click="BtnManCat_Click"/>
+                <Button Grid.Column="2" Content="Мой профиль" Width="120" Height="26"
+                        Margin="0,0,8,0" Click="BtnProfile_Click"/>
+                <Button Grid.Column="3" Content="Выйти" Width="90" Height="26"
+                        Click="BtnLogout_Click"/>
+            </Grid>
+        </Border>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,8">
+            <TextBlock Text="Таблица:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <ComboBox x:Name="CmbTables" Width="280"
+                      DisplayMemberPath="DisplayName"
+                      SelectionChanged="CmbTables_SelectionChanged"/>
+            <Button Content="Обновить" Width="100" Margin="10,0,0,0"
+                    Click="BtnRefresh_Click"/>
+            <Button Content="Редактировать" Width="120" Margin="10,0,0,0"
+                    Click="BtnEdit_Click"/>
+            <Button Content="Удалить" Width="100" Margin="10,0,0,0"
+                    Click="BtnDelete_Click"/>
+            <TextBlock x:Name="TxtStatus" VerticalAlignment="Center"
+                       Margin="20,0,0,0" Foreground="Gray"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,8">
+            <TextBlock Text="Фильтр:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <TextBox x:Name="TxtFilter" Width="400" TextChanged="TxtFilter_TextChanged"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="3" x:Name="GridData"
+                  AutoGenerateColumns="True"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  SelectionMode="Single"
+                  AlternatingRowBackground="#F5F5F5"
+                  RowHeight="24" FontSize="12"/>
+
+        <StatusBar Grid.Row="4" Margin="0,8,0,0">
+            <StatusBarItem>
+                <TextBlock x:Name="TxtRowCount" Text="Строк: 0"/>
+            </StatusBarItem>
+            <Separator/>
+            <StatusBarItem>
+                <TextBlock x:Name="TxtTableName"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
